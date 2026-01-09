@@ -1,0 +1,130 @@
+Run parameter for anasum
+
+========================================================
+All lines without a '*' in the first column are ignored!
+--------------------------------------------------------
+
+========================================================
+File containing time mask details 
+(this allows to exclude certain time intervals from 
+the analysis)
+* TIMEMASKFILE 
+========================================================
+Exclusion region around sky map centre
+(should be increased for bright sources)
+* REGIONTOEXCLUDE 0. 0. 0.35
+ REGIONTOEXCLUDE 0. 0. 1.0 0.35 40
+
+========================================================
+Spectral index for effective areas
+(should be iteratively adjusted to match the measured
+spectrum)
+* ENERGYSPECTRALINDEX 
+
+========================================================
+write tree with all events to anasum output file
+(data_on and data_off trees)
+0 = don't fill tree
+1 = fill all events
+2 = fill events after direction cut only 
+(data_off contains events in off regions)
+* WRITEEVENTTREE 2
+
+========================================================
+NO CHANGE NECESSARY BELOW THIS POINT FOR A STANDARD ANALYSIS
+========================================================
+
+========================================================
+Sky plot binning and size
+binning of sky map (correlated plots) [deg]
+* SKYMAPBINSIZE 0.01
+binning of sky map (uncorrelated plots) [deg]
+* SKYMAPBINSIZEUC 0.05
+size of sky map (x-axis) [deg]
+(note: require same value for min and max)
+* SKYMAPSIZEX -2. 2.
+size of sky map (y-axis) [deg]
+(note: require same value for min and max)
+* SKYMAPSIZEY -2. 2.
+========================================================
+
+Shift the centre position of sky map
+(default: assume source coordinates)
+in equatorial coordinates (ra,dec) (J2000, deg)
+* SKYMAPCENTRE_RADECJ2000_DEG 
+ in equatorial coordinates (ra,dec) (J2000, hours)
+ SKYMAPCENTRE_RADECJ2000_HOUR 05 37 38.686 +21 08 33.18
+
+========================================================
+Change the position where number of on and off events, significances,
+effective areas, all 1D histograms, etc are calculated
+(default: at sky map centre)
+
+relative to (0,0) in sky plot [deg]
+(West,North)
+ TARGETXYSHIFT 0. 0.
+Position in equatorial coordinates (ra,dec) (J2000, deg)
+* TARGETPOSITION_RADECJ2000_DEG 
+Position in equatorial coordinates (ra,dec) (J2000, hours)
+ TARGETPOSITION_RADECJ2000_HOUR  03 30 13.24 -05 32 36.3
+
+========================================================
+Star catalogue
+(start catalogues can be found in
+$VERITAS_EVNDISP_AUX_DIR/AstroData/Catalogues/)
+* BRIGHTSTARCATALOGUE Hipparcos_MAG8_1997.dat
+Minimum magnitude of stars to be excluded
+* BRIGHTSTARBRIGHTNESS 7.0
+Radius of region to be excluded from background calculation around bright star (<=0 to switch off)
+* BRIGHTSTAREXCLUDEFROMBACKGROUNDRADIUS 0.25
+
+User defined regions in the sky to exclude from background 
+If Radius1=Radius2 and theta=0: circle (point source)
+If Radius1!=Radius2: ellipse (extended source)
+If Radius1!=Radius2 and theta!=0: rotated ellipse (extended source)
+
+->REGIONTOEXCLUDE (West(deg)  North(deg)  Radius(deg))
+(coordinates are relative to camera center)
+ex: 0.48 -0.2 0.5
+Note: West positive means toward West (left in camera coordinates)
+North positive means toward South (up in camera coordinates)
+->REGIONTOEXCLUDE_RADECJ2000_DEG (RA(deg) DEC(deg) Radius(deg))
+ex: 335.287 58.964 0.5
+->REGIONTOEXCLUDE_RADECJ2000_HOUR (RA(Hour Min Sec)  DEC(Deg Min Sec)  Radius(deg))
+ex:12 24 15 52 18 04 0.5
+
+->REGIONTOEXCLUDE (West(deg)  North(deg)  Radius1(deg) Radius2(deg) theta(deg))
+(coordinates are relative to camera center)
+ex: 0.48 -0.2 0.5 0.5 40
+Note: West positive means toward West (left in camera coordinates)
+North positive means toward South (up in camera coordinates)
+->REGIONTOEXCLUDE_RADECJ2000_DEG (RA(deg) DEC(deg) Radius1(deg) Radius2(deg) theta(deg))
+ex: 335.287 58.964 0.5 0.5 40
+->REGIONTOEXCLUDE_RADECJ2000_HOUR (RA(Hour Min Sec)  DEC(Deg Min Sec)  Radius1(deg) Radius2(deg) theta(deg))
+ex:12 24 15 52 18 04 0.5 0.5 40
+
+
+Additional regions:
+ REGIONTOEXCLUDE_RADECJ2000_DEG 345.004 59.4042 0.12
+Zeta Tau
+* REGIONTOEXCLUDE_RADECJ2000_HOUR 05 37 38.686 +21 08 33.18 0.25
+
+========================================================
+Energy spectra 
+
+Energy spectra binning (logarithmic axis)
+* ENERGYBINSIZE 0.05
+Use effective areas vs MC or REC energy (set to 'MC' or 'REC')
+* ENERGYEFFECTIVEAREAS REC
+Dead time calculation
+(0=using L1 scalars, 1=using tdiff distributions)
+* DEADTIMECALCULATIONMETHOD 0
+========================================================
+
+========================================================
+Rate plots
+
+time intervalls for rate plots and short term histograms [minutes]
+* RATEINTERVALLLENGTH 4.
+========================================================
+
